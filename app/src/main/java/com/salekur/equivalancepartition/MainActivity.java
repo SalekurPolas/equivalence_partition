@@ -31,8 +31,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void CheckInputValue() {
-        //.....
+        //Question: get input in 3 digit but 911 is not included
+        //Partition: [(-)INF - (-)1] [000 - 910] [911] [912 - 999] [1000 - (+)INF]
 
-        result.setText("Invalid input");
+        String StringValue = input.getText().toString();
+        int value = Integer.parseInt(StringValue);
+
+        //checking input is 3 digit or not
+        if (StringValue.length() == 3) {
+            if (value < 0) { //checking 1st partition
+                result.setText(StringValue + " is a Invalid input");
+            } else if(value >= 0 && value < 911) { //checking 2nd partition
+                result.setText(StringValue + " is a Valid input");
+            } else if (value == 911) { //checking 3rd partition
+                result.setText(StringValue + " is a Invalid input");
+            } else if (value >= 912 && value < 1000) { //checking 4th partition
+                result.setText(StringValue + " is a Valid input");
+            } else if(value >= 1000) { //checking 5th partition
+                result.setText(StringValue + " is a Invalid input");
+                //this else if can be replace with only else
+            }
+        } else { // if input is not 3 digit
+            result.setText(StringValue + " is a Invalid input");
+        }
     }
 }
